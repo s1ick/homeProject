@@ -1,0 +1,12 @@
+
+<perfect-scrollbar class="scroll">
+    <div class="list-books" *ngIf="BooksService.response">    
+        <div class="list-books__item list-books-item" *ngFor="let books of BooksService.response.docs">
+            <img *ngIf="books.isbn != ''" [src]="(pathImg + 'b/' +'isbn/' + books.isbn[0] + '-L.jpg')" alt="">
+            <div class="list-books-item-content">
+                <div><b>Title:</b>&nbsp;{{books.title}}</div>
+                <div><b>Author:</b>&nbsp;{{books.author_name}}</div>
+            </div>
+        </div>
+    </div>
+</perfect-scrollbar>
