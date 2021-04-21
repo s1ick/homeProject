@@ -15,6 +15,8 @@ import { BooksService } from './books.service';
 import { NoDataComponent } from './no-data/no-data.component';
 import { LoaderComponent } from './loader/loader.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { ItemBookComponent } from './item-book/item-book.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -25,7 +27,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     HeaderComponent,
     ListBooksComponent,
     NoDataComponent,
-    LoaderComponent
+    LoaderComponent,
+    ItemBookComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatInputModule,
     HttpClientModule,
     FormsModule,
-    NgxSkeletonLoaderModule
+    NgxSkeletonLoaderModule,
+    MatDialogModule
   ],
   providers: [
     {

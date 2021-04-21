@@ -1,15 +1,30 @@
-
 <perfect-scrollbar class="scroll">
-    <div class="list-books" *ngIf="BooksService.response">    
-        <div class="list-books__item list-books-item" *ngFor="let books of BooksService.response.docs">
-            <img *ngIf="books.isbn" [src]="(pathImg + 'b/' +'isbn/' + books.isbn[0] + '-L.jpg')" alt="">
-            <div class="list-books-item-content">
-                <div><b>Title:</b>&nbsp;{{books.title}}</div>
-                <div><b>Author:</b>&nbsp;{{books.author_name}}</div>
-            </div>
-        </div>
-        <app-no-data [title]="'NO RESULTS'" [imgName]="'no-matches'" [subTitle]="'Try to change your request'" *ngIf="!BooksService.response.docs.length"></app-no-data>
+  <div class="list-books" *ngIf="BooksService.response">
+    <div
+      class="list-books__item list-books-item"
+      *ngFor="let book of BooksService.response.docs"
+      (click)="openDialog(book)"
+    >
+      <img
+        #img
+        *ngIf="book.isbn"
+        [src]="pathImg + 'b/' + 'isbn/' + book.isbn[0] + '-M.jpg'"
+        alt=""
+      />
+      <div class="list-books-item-content">
+        <div><b>Title:</b>&nbsp;{{ book.title }}</div>
+        <div><b>Author:</b>&nbsp;{{ book.author_name }}</div>
+      </div>
     </div>
-    <app-no-data  *ngIf="!BooksService.response"></app-no-data>
+    <app-no-data
+      [title]="'NO RESULTS'"
+      [imgName]="'no-matches'"
+      [subTitle]="'Try to change your request'"
+      *ngIf="!BooksService.response.docs.length && !BooksService.loader"
+    ></app-no-data>
+  </div>
+  <app-no-data
+    *ngIf="!BooksService.response && !BooksService.loader"
+  ></app-no-data>
+  <app-loader *ngIf="BooksService.loader"></app-loader>
 </perfect-scrollbar>
-<app-loader *ngIf="BooksService.loader"></app-loader>

@@ -11,9 +11,8 @@ export class BooksService {
     this.loader = true;
     this.http.get('http://openlibrary.org/search.json?author=' + author)
     .subscribe((response) => {
-      this.loader = false;
       this.response = response;
-      console.log(this.response);
+      this.loader = false;
     })
   }
 }

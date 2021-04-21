@@ -24,10 +24,11 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     fromEvent(this.input.nativeElement, 'keyup')
       .pipe(
+        distinctUntilChanged(),
+        debounceTime(500),
         map((event: any) => {
           this.BooksService.searchTitle(event.target.value);
-          console.log(event.target.value);
-          return  this.resultEvent = event.target.value;
+          return (this.resultEvent = event.target.value);
         })
       )
       .subscribe();
