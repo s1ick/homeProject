@@ -13,6 +13,8 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { FormsModule } from '@angular/forms';
 import { BooksService } from './books.service';
 import { NoDataComponent } from './no-data/no-data.component';
+import { LoaderComponent } from './loader/loader.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -22,7 +24,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AppComponent,
     HeaderComponent,
     ListBooksComponent,
-    NoDataComponent
+    NoDataComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PerfectScrollbarModule,
     MatInputModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxSkeletonLoaderModule
   ],
   providers: [
     {

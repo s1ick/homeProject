@@ -12,3 +12,4 @@
     </div>
     <app-no-data  *ngIf="!BooksService.response"></app-no-data>
 </perfect-scrollbar>
+<app-loader *ngIf="BooksService.loader"></app-loader>
