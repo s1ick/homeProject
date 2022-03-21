@@ -9,6 +9,7 @@
         #img
         *ngIf="book.isbn"
         [src]="pathImg + 'b/' + 'isbn/' + book.isbn[0] + '-M.jpg'"
+        (load)="onImageload($event)"
         alt=""
       />
       <div class="list-books-item-content">
