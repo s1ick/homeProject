@@ -1,0 +1,137 @@
+::ng-deep {
+  .mat-mdc-dialog-title {
+    &::before {
+      content: none !important;
+    }
+  }
+  .mat-dialog-container {
+    margin: 0;
+    padding: 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    max-width: 600px;
+    width: 90%;
+  }
+
+  .mat-dialog-title {
+    margin: 0;
+    font: inherit;
+  }
+
+  .mat-dialog-content {
+    padding: 0;
+    margin: 0;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+}
+
+.book-dialog-header {
+  padding: 12px 20px;
+  background: #ecf5ff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #d5e3f3;
+  min-height: 56px;
+
+&__title {
+  font-size: clamp(16px, 4vw, 20px); // Автоматически адаптируется от 16px до 20px
+  padding: 0;
+  max-width: 504px;
+}
+}
+.book-dialog-content {
+  padding: 16px 24px;
+}
+
+.book-dialog-content-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 16px;
+}
+
+.book-dialog-content-text {
+  flex-grow: 1;
+  min-width: 50%;
+
+  &__item {
+    margin-bottom: 6px;
+    word-break: break-word;
+
+    b {
+      margin-right: 6px;
+    }
+    a {
+      color: #264f81;
+    }
+  }
+}
+
+.book-dialog-content-img {
+  flex-grow: 1;
+  min-width: 120px;
+  max-width: 200px;
+  margin-right: 12px;
+
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+}
+
+.book-dialog-content-footer {
+  display: flex;
+  justify-content: center;
+  padding-top: 16px;
+}
+
+.btn {
+  background: #3166A2;
+  height: 40px;
+  min-width: 120px;
+  border: none;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: #264f81;
+  }
+}
+
+.close-container {
+  position: relative;
+  cursor: pointer;
+  padding: 8px;
+
+  &:hover {
+    .leftright, .rightleft {
+      background-color: #3166A2;
+    }
+  }
+}
+
+.leftright, .rightleft {
+  height: 2px;
+  width: 16px;
+  position: absolute;
+  background-color: #839DBB;
+  transition: all .3s ease-in;
+}
+
+.leftright {
+  transform: rotate(45deg);
+}
+
+.rightleft {
+  transform: rotate(-45deg);
+}

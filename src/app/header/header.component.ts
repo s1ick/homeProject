@@ -1,34 +1,40 @@
-import { HttpClient } from '@angular/common/http';
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
-import { fromEvent } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
-import { BooksService } from './../books.service';
+import { CommonModule } from '@angular/common';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { BooksService } from '../books.service';
+import { debounceTime, distinctUntilChanged, fromEvent, map } from 'rxjs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
+  standalone: true,
+  imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule],
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.less'],
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, AfterViewInit {
-  @ViewChild('input') input!: ElementRef;
+  @ViewChild('input') input!: ElementRef<HTMLInputElement>;
   author: string = '';
-  resultEvent: any;
-  constructor(public BooksService: BooksService, private http: HttpClient) {}
+
+  constructor(public booksService: BooksService) {}
+
   ngOnInit(): void {}
+
   ngAfterViewInit(): void {
-    fromEvent(this.input.nativeElement, 'keyup')
+    fromEvent<KeyboardEvent>(this.input.nativeElement, 'keyup')
       .pipe(
         distinctUntilChanged(),
         debounceTime(500),
-        map((event: any) => {
-          this.BooksService.searchTitle(event.target.value);
-          return (this.resultEvent = event.target.value);
+        map((event: KeyboardEvent) => {
+          const target = event.target as HTMLInputElement;
+          const author = target.value;
+          if (author.trim()) {  // Если значение введено
+            this.booksService.searchTitle(author).subscribe(response => {
+              // Обработка ответа, если нужно
+              console.log(response);  // Или можно вывести результат в компонент
+            });
+          }
         })
       )
       .subscribe();

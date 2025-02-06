@@ -1,10 +1,6 @@
 <div class="book-dialog">
   <div class="book-dialog__header book-dialog-header">
-    <div
-      class="book-dialog-header__title book-dialog-header-title"
-      mat-dialog-title
-    >
-      <!-- TITLE books -->
+    <div class="book-dialog-header__title book-dialog-header-title" mat-dialog-title>
       {{ data.title }}
     </div>
     <div class="close-container" mat-dialog-close>
@@ -15,40 +11,44 @@
   <mat-dialog-content>
     <div class="book-dialog-content">
       <div class="book-dialog-content-wrapper">
-        <div class="book-dialog-content-img" *ngIf="data.isbn">
+        <div class="book-dialog-content-img" *ngIf="data.cover_i || data.cover_edition_key">
           <img
-            [src]="pathImg + 'b/' + 'isbn/' + data.isbn[0] + '-L.jpg'"
-            alt=""
+            *ngIf="data.cover_i"
+            [src]="'https://covers.openlibrary.org/b/id/' + data.cover_i + '-L.jpg'"
+            alt="{{ data.title }}"
+          />
+          <img
+            *ngIf="!data.cover_i && data.cover_edition_key"
+            [src]="'https://covers.openlibrary.org/b/olid/' + data.cover_edition_key + '-L.jpg'"
+            alt="{{ data.title }}"
           />
         </div>
 
         <div class="book-dialog-content-text">
           <div *ngIf="data.author_name">
-            <b>Author:</b>{{ data.author_name }}
+            <b>Автор:</b> {{ data.author_name.join(', ') }}
           </div>
-          <div class="book-dialog-content-text__item" *ngIf="data.publish_year">
-            <b>Publication date:</b>{{ data.publish_year }}
+          <div class="book-dialog-content-text__item" *ngIf="data.first_publish_year">
+            <b>Год первой публикации:</b> {{ data.first_publish_year }}
           </div>
-          <div class="book-dialog-content-text__item" *ngIf="data.isbn">
-            <b>ISBN:</b>{{ data.isbn }}
+          <div class="book-dialog-content-text__item" *ngIf="data.edition_count">
+            <b>Количество изданий:</b> {{ data.edition_count }}
           </div>
-
-          <!-- <div class="book-dialog-content-text__item">
-            <b>Author:</b>TOLKIEN
+          <div class="book-dialog-content-text__item" *ngIf="data.language">
+            <b>Доступные языки:</b> {{ data.language.join(', ') }}
           </div>
-          <div class="book-dialog-content-text__item">
-            <b>Publication date:</b>DATA
+          <div class="book-dialog-content-text__item" *ngIf="data.description">
+            <b>Description:</b> {{ data.description }}
+          </div>          
+          <div class="book-dialog-content-text__item" *ngIf="data.ia?.length">
+            <b>Full text:</b>
+            <a [href]="'https://archive.org/details/' + data.ia[0]" target="_blank">Read on Archive.org</a>
           </div>
-          <div class="book-dialog-content-text__item"><b>ISBN:</b>123456</div> -->
+          <div class="book-dialog-content-text__item" *ngIf="data.id_librivox">
+            <b>Аудиокнига:</b>
+            <a [href]="'https://librivox.org/' + data.id_librivox[0]" target="_blank">LibriVox</a>
+          </div>
         </div>
-      </div>
-      <div class="book-dialog-content-footer" *ngIf="false">
-        <mat-dialog-actions>
-          <button class="btn" mat-dialog-close>
-            <span class="noselect">Close</span>
-            <div class="circle"></div>
-          </button>
-        </mat-dialog-actions>
       </div>
     </div>
   </mat-dialog-content>
